@@ -10,10 +10,10 @@ public class LanguageManager : MonoSingleton<LanguageManager>
 {
     Dictionary<string, LanguageInfo> DicLanguageInfo = new Dictionary<string, LanguageInfo>();
 
-    public bool TextLoad()
+    public bool JsonLoad()
     {
         #region Resources에서 로드
-        TextAsset languageInfoJSON = Resources.Load<TextAsset>("JSON/chapter_KOR");
+        TextAsset languageInfoJSON = Resources.Load<TextAsset>("JSON/Chapter_KOR");
 
         JSONNode rootNode = JSON.Parse(languageInfoJSON.text);
 
@@ -22,6 +22,7 @@ public class LanguageManager : MonoSingleton<LanguageManager>
             LanguageInfo languageInfo = new LanguageInfo(pair.Key, pair.Value);
             DicLanguageInfo.Add(pair.Key, languageInfo);
         }
+    
         #endregion
 
         #region StreamingAssets에서 로드
@@ -36,7 +37,7 @@ public class LanguageManager : MonoSingleton<LanguageManager>
         //}
         #endregion
 
-        Debug.Log("TextLoad");
+        Debug.Log("LanguageManager Load");
         return true;
     }
 
