@@ -60,7 +60,7 @@ public class UIManager : MonoSingleton<UIManager>
     }
 
     // Hierarchy 맨위로 변경
-    public void SetHierarchy(eUIType _uiType)
+    public void SetHierarchyTop(eUIType _uiType)
     {
         GameObject showObject = GetUI(_uiType);
         showObject.transform.SetAsFirstSibling();
