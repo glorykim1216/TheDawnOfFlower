@@ -30,14 +30,17 @@ public class Intro : MonoBehaviour
     {
         for (int i = 0; i < test.Length; i++)
         {
-            //text.PrintFadeText(test[0]);
-            //yield return null;
             yield return StartCoroutine(fadeInText.Cor_PrintFadeText(test[i]));
             yield return StartCoroutine(fadeInText.Cor_FadeOutText());
         }
 
         // 인트로 끝나면 Game 로드
+        textUI.gameObject.SetActive(false);
+
+        SceneFadeManager.Instance.FadeIn(0.5f);
+        yield return new WaitForSeconds(1);
         UIManager.Instance.ShowUI(eUIType.Game);
+        SceneFadeManager.Instance.FadeOut(0.5f);
         UIManager.Instance.HideUI(eUIType.Intro);
     }
 }
