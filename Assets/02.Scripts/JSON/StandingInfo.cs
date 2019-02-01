@@ -7,7 +7,6 @@ using SimpleJSON;
 
 public class StandingInfo
 {
-    string strKey = string.Empty;
     List<string> backgroundList = new List<string>();
     List<string> s1List = new List<string>();
     List<string> s1DirectionList = new List<string>();
@@ -34,10 +33,8 @@ public class StandingInfo
     public List<string> SOUND1_LIST { get { return sound1List; } }
     public List<string> SOUND2_LIST { get { return sound2List; } }
 
-    public StandingInfo(string _strKey, JSONNode _nodeData)
+    public StandingInfo(JSONNode _nodeData)
     {
-        strKey = _strKey;
-
         JSONArray arrTemp = _nodeData["Background"].AsArray;
         if (arrTemp != null)
         {

@@ -7,17 +7,14 @@ using SimpleJSON;
 
 public class LanguageInfo
 {
-    string strKey = string.Empty;
     List<string> nameList = new List<string>();
     List<string> contentsList = new List<string>();
 
     public List<string> NAME_LIST { get { return nameList; } }
     public List<string> CONTENTS_LIST { get { return contentsList; } }
 
-    public LanguageInfo(string _strKey, JSONNode _nodeData)
+    public LanguageInfo(JSONNode _nodeData)
     {
-        strKey = _strKey;
-
         JSONArray arrName = _nodeData["Name"].AsArray;
         if (arrName != null)
         {

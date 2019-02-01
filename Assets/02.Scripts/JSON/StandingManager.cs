@@ -19,7 +19,7 @@ public class StandingManager : MonoSingleton<StandingManager>
 
         foreach (KeyValuePair<string, JSONNode> pair in rootNode as JSONObject)
         {
-            StandingInfo standingInfo = new StandingInfo(pair.Key, pair.Value);
+            StandingInfo standingInfo = new StandingInfo(pair.Value);
             DicStandingInfo.Add(pair.Key, standingInfo);
         }
 

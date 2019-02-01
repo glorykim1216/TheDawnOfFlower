@@ -19,7 +19,7 @@ public class LanguageManager : MonoSingleton<LanguageManager>
 
         foreach (KeyValuePair<string, JSONNode> pair in rootNode as JSONObject)
         {
-            LanguageInfo languageInfo = new LanguageInfo(pair.Key, pair.Value);
+            LanguageInfo languageInfo = new LanguageInfo(pair.Value);
             DicLanguageInfo.Add(pair.Key, languageInfo);
         }
     
