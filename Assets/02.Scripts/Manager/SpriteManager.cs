@@ -7,10 +7,8 @@ public class SpriteManager : MonoSingleton<SpriteManager>
 {
     private Dictionary<string, Sprite> DicExpression = new Dictionary<string, Sprite>();
     private StringBuilder sb = new StringBuilder();
-    public Sprite[] resourcesSprite;
-    private string expressionName;
 
-    public void Load()
+    public void LoadSprite()
     {
         StandingSpriteLoad();
         BackgroudSpriteLoad();
@@ -23,18 +21,19 @@ public class SpriteManager : MonoSingleton<SpriteManager>
 
         if (spriteTmp == null)
         {
-            Debug.LogError("1. JSON name 확인, 2. 이미지 있는지 확인");
+            Debug.LogError("1. key값 확인, 2. 이미지 있는지 확인");
             return null;
         }
 
         return spriteTmp;
     }
 
+    // 이미지 로드
     public void ResourcesSpriteLoad(string _str)
     {
         sb.Length = 0;
         sb.AppendFormat("{0}{1}", "Sprite/", _str);
-        resourcesSprite = Resources.LoadAll<Sprite>(sb.ToString());
+        Sprite[] resourcesSprite = Resources.LoadAll<Sprite>(sb.ToString());
         for (int i = 0; i < resourcesSprite.Length; i++)
         {
             DicExpression.Add(resourcesSprite[i].name, resourcesSprite[i]);
