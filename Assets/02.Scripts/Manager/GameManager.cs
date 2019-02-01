@@ -10,17 +10,19 @@ public class GameManager : MonoSingleton<GameManager>
 
     public eLanguage language = eLanguage.KOREA_;
 
-
     // DB 로드 후 값 초기화 필요!
-    void Start()
+    public void InitGameManager()
     {
+        LanguageManager.Instance.LoadJson();
+        StandingManager.Instance.LoadJson();
+        SpriteManager.Instance.LoadSprite();
+        SoundManager.Instance.LoadSound();
         GameManager.Instance.LoadMain();
-        LanguageManager.Instance.TextLoad();
-    }
-
-    void Update()
-    {
-
+        
+        
+        // Test_Mode
+        //SceneFadeManager.Instance.LoadScene(eScene.GAME);
+        //isIntroView = true;
     }
 
     public void LoadMain()
@@ -40,7 +42,7 @@ public class GameManager : MonoSingleton<GameManager>
         else
         {
             UIManager.Instance.ShowUI(eUIType.Main);
-            UIManager.Instance.SetHierarchy(eUIType.Main);
+            UIManager.Instance.SetHierarchyTop(eUIType.Main);
         }
     }
 
