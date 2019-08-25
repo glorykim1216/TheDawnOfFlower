@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 23fda8dcd531c8945801481ac7b6246f
+timeCreated: 1540705777
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Noto Serif CJK KR
+  fontNames:
+  - Noto Serif CJK KR
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

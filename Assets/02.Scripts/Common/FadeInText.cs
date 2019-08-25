@@ -38,6 +38,10 @@ public class FadeInText : MonoBehaviour
     {
         textUI = _textUI;
     }
+    public Text GetTextUI()
+    {
+        return textUI;
+    }
     public void SetFadeSpeed(float _fadeSpeed)
     {
         if (_fadeSpeed != 0)
@@ -56,6 +60,7 @@ public class FadeInText : MonoBehaviour
         StartCoroutine("Cor_PrintFadeText", _text);
     }
 
+    // 문자열을 한 글자씩 서서히 나타나게하는 함수
     public IEnumerator Cor_PrintFadeText(string _text)
     {
         isPrinting = true;
@@ -94,10 +99,7 @@ public class FadeInText : MonoBehaviour
 
         isPrinting = false;
     }
-    //public IEnumerator Cor_StopPrintFadeText()
-    //{
 
-    //}
     public IEnumerator Cor_FadeOutText()
     {
         float alphaTime = 0;

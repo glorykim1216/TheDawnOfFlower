@@ -13,10 +13,6 @@ public class Game : MonoBehaviour
     public Image character2;
     public Image character3;
 
-    public Transform tr_character1;
-    public Transform tr_character2;
-    public Transform tr_character3;
-
     public GameObject nameImg;
     public GameObject contentsImg;
     public GameObject remembranceImg;
@@ -39,6 +35,7 @@ public class Game : MonoBehaviour
     float s3Pos;
 
     int currCount;
+    public float SkipTime;
 
     StandingInfo standingInfo;
     StandingCharacter standingChracter;
@@ -48,7 +45,7 @@ public class Game : MonoBehaviour
         fadeInText = this.GetComponent<FadeInText>();
         fadeInText.Init(contentsText, 8, 1);
 
-        btn.onClick.AddListener(() => main());
+        btn.onClick.AddListener(() => NextBtn());
 
         // Chapter 로드
         LanguageInfo info = LanguageManager.Instance.GetText(GameManager.Instance.language + "Chapter1");
@@ -67,14 +64,26 @@ public class Game : MonoBehaviour
             strContentsText[i] = info.CONTENTS_LIST[i];
         }
 
-        tr_character1 = character1.transform;
-        tr_character2 = character2.transform;
-        tr_character3 = character3.transform;
-        Debug.Log(character1.sprite.name);
-
+        NextBtn();
     }
-    void main()
+
+    private void Update()
     {
+        // 자동넘기기
+        if (fadeInText.isPrinting == false)
+        {
+            SkipTime += Time.deltaTime;
+        }
+
+        if (SkipTime >= 5)
+        {
+            NextBtn();
+        }
+    }
+
+    void NextBtn()
+    {
+        SkipTime = 0;
         //SceneFadeManager.Instance.LoadScene(eScene.MAIN);
 
         if (fadeInText.isPrinting == true)
@@ -101,8 +110,6 @@ public class Game : MonoBehaviour
                 standingInfo.S3_LIST[currCount], standingInfo.S3_DIRECTION_LIST[currCount], standingInfo.S3_SCALE_LIST[currCount],
                 "", "");
 
-            //nameText.text = strNameText[currCount];
-            //cor_textPrint = StartCoroutine(fadeInText.Cor_PrintFadeText(strContentsText[currCount]));
             currCount++;
         }
 
@@ -170,37 +177,23 @@ public class Game : MonoBehaviour
                 standingChracter.SetCharacter(character1, true, _standing1, _s1Direction, _s1Scale, eStandingPosition.STANDING3_LEFT);
                 standingChracter.SetCharacter(character2, true, _standing2, _s2Direction, _s2Scale, eStandingPosition.STANDING1_CENTER);
                 standingChracter.SetCharacter(character3, true, _standing3, _s3Direction, _s3Scale, eStandingPosition.STANDING3_RIGHT);
-
-                //tr_character1.position = new Vector3(-550, tr_character1.position.y, 0);
-                //tr_character2.position = new Vector3(0, tr_character2.position.y, 0);
-                //tr_character3.position = new Vector3(550, tr_character3.position.y, 0);
             }
             else if (!_standing2.Equals("null"))    // 2명
             {
                 standingChracter.SetCharacter(character1, true, _standing1, _s1Direction, _s1Scale, eStandingPosition.STANDING2_LEFT);
                 standingChracter.SetCharacter(character2, true, _standing2, _s2Direction, _s2Scale, eStandingPosition.STANDING2_RIGHT);
                 standingChracter.SetCharacter(character3, false);
-
-                //tr_character1.position = new Vector3(-450, tr_character1.position.y, 0);
-                //tr_character2.position = new Vector3(450, tr_character2.position.y, 0);
             }
             else                                    // 1명
             {
-                //if (_s1Position.Equals("L"))
-                //    s1Pos = 0;
-                //else if (_s1Position.Equals("R"))
-                //    s1Pos = 0;
-                //else if (_s1Position.Equals("C"))
-                //    s1Pos = 0;
-                if(_standing1.Contains("sword"))
-                    standingChracter.SetCharacter(character1, true, _standing1, _s1Direction, _s1Scale, eStandingPosition.SWORD);
-                else
-                    standingChracter.SetCharacter(character1, true, _standing1, _s1Direction, _s1Scale, eStandingPosition.STANDING1_CENTER);
+                // 스크립트 나올때까지 임시 주석(검 좌우 구분해야하나? 물어봐야함.)
+                //if(_standing1.Contains("sword"))
+                //    standingChracter.SetCharacter(character1, true, _standing1, _s1Direction, _s1Scale, eStandingPosition.SWORD);
+                //else
+                standingChracter.SetCharacter(character1, true, _standing1, _s1Direction, _s1Scale, eStandingPosition.STANDING1_CENTER);
 
                 standingChracter.SetCharacter(character2, false);
                 standingChracter.SetCharacter(character3, false);
-
-                //tr_character1.position = new Vector3(0, tr_character1.position.y, 0);
             }
         }
         nameText.text = _name;

@@ -41,3 +41,13 @@ public enum eLanguage
     CHINA_,
     MAX
 }
+
+public enum eStandingPosition
+{
+    STANDING1_CENTER,
+    STANDING2_LEFT,
+    STANDING2_RIGHT,
+    STANDING3_LEFT,
+    STANDING3_RIGHT,
+    SWORD
+}
