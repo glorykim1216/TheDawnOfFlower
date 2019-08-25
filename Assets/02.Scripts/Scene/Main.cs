@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Main : MonoBehaviour
 {
     public Image title;
-    public Image titleBG;
+    //public Image titleBG;
     public Button[] btn;
 
     void Start()
@@ -17,7 +17,7 @@ public class Main : MonoBehaviour
             btn[i].onClick.AddListener(() => MainButton((eMainButton)_i));
         }
 
-        titleBG.CrossFadeAlpha(0, 0, true);
+        //titleBG.CrossFadeAlpha(0, 0, true);
         title.CrossFadeAlpha(0, 0, true);
         for (int i = 0; i < btn.Length; i++)
         {
@@ -52,8 +52,8 @@ public class Main : MonoBehaviour
 
     IEnumerator Cor_StartMain()
     {
-        yield return new WaitForSeconds(0.5f);
-        titleBG.CrossFadeAlpha(1, 2.0f, true);
+        //yield return new WaitForSeconds(0.5f);
+        //titleBG.CrossFadeAlpha(1, 2.0f, true);
         yield return new WaitForSeconds(1);
         title.CrossFadeAlpha(1, 2.0f, true);
         yield return new WaitForSeconds(1);

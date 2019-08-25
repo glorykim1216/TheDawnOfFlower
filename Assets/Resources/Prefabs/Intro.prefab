@@ -82,21 +82,21 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 4eec86be135e2394799e7c584b163461, type: 3}
-    m_FontSize: 34
+    m_Font: {fileID: 12800000, guid: 84dc3d4081f3aeb408323b6ab9043c8e, type: 3}
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
-    m_MaxSize: 51
+    m_MaxSize: 52
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1.5
-  m_Text: "\uADF8\uB140\uAC00 \uB098\uB97C \uAC10\uC2F8 \uC548\uC790\n\uD55C \uC90C\uC758
-    \uC628\uAE30\uB3C4 \uB290\uAEF4\uC9C0\uC9C0 \uC54A\uC558\uB2E4.\n\uBE44\uB85C\uC18C
-    \uAFC8<color=\"#FFFFFFE6\">\uC774</color><color=\"#FFFFFF73\">\uB77C</color>"
+    m_LineSpacing: 1
+  m_Text: "          \uADF8\uB140\uAC00 \uB098\uB97C \uAC10\uC2F8 \uC548\uC790\n \uD55C
+    \uC90C\uC758 \uC628\uAE30\uB3C4 \uB290\uAEF4\uC9C0\uC9C0 \uC54A\uC558\uB2E4.\n
+    \ \uBE44\uB85C\uC18C \uAFC8<color=\"#FFFFFFE6\">\uC774</color><color=\"#FFFFFF73\">\uB77C</color>"
 --- !u!114 &114316763441168742
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,7 +128,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a3f98d8d10391b14ba1f87689e1d37d6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 53ddbd98c4ed3514b8212502a5e5a384, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -175,8 +175,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: -75}
-  m_SizeDelta: {x: 595, y: 345}
+  m_AnchoredPosition: {x: 30, y: -33}
+  m_SizeDelta: {x: 781.86, y: 345}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224732936435797866
 RectTransform:
