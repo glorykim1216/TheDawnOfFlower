@@ -24,6 +24,7 @@ public enum eUIType
     Intro,
     Game,
     Image,
+    CreateName,
     MAX
 }
 

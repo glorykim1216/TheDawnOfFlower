@@ -7,8 +7,10 @@ public class GameManager : MonoSingleton<GameManager>
 {
     bool isFristOn;
     bool isIntroView;
-
+    bool isCreateName;
     public eLanguage language = eLanguage.KOREA_;
+
+    public string mainCharacterName;
 
     // DB 로드 후 값 초기화 필요!
     public void InitGameManager()
@@ -48,9 +50,12 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void LoadGame()
     {
-        if (isIntroView == false)
+        if (isCreateName == false)
         {
-            UIManager.Instance.ShowUI(eUIType.Intro);
+            UIManager.Instance.ShowUI(eUIType.CreateName);
+
+            isCreateName = true;
+            //UIManager.Instance.ShowUI(eUIType.Intro);
             // 인트로 X
             //isIntroView = true;
         }
