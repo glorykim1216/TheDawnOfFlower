@@ -45,10 +45,9 @@ public enum eLanguage
 
 public enum eStandingPosition
 {
-    STANDING1_CENTER,
-    STANDING2_LEFT,
-    STANDING2_RIGHT,
-    STANDING3_LEFT,
-    STANDING3_RIGHT,
-    SWORD
+    M1,
+    M2,
+    L,
+    R,
+    S
 }

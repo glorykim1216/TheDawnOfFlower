@@ -61,6 +61,7 @@ public class SpriteManager : MonoSingleton<SpriteManager>
     public void BackgroudSpriteLoad()
     {
         // 배경
-        ResourcesSpriteLoad("Background");
+        ResourcesSpriteLoad("Background/Royal corridor morning");
+        //ResourcesSpriteLoad("Background/Royal corridor morning");
     }
 }

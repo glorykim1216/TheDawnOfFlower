@@ -1,7 +1,8 @@
-﻿// LanguageManager 파싱 할 정보를 담는 클래스
+﻿/**
+ * @Description : LanguageManager 파싱 할 정보를 담는 클래스.
+ * @Author : glorykim
+ */
 
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
@@ -10,11 +11,14 @@ public class LanguageInfo
     List<string> nameList = new List<string>();
     List<string> contentsList = new List<string>();
 
+    // name, contents 프로퍼티
     public List<string> NAME_LIST { get { return nameList; } }
     public List<string> CONTENTS_LIST { get { return contentsList; } }
 
+    // 해당 List에 데이터를 저장
     public LanguageInfo(JSONNode _nodeData)
     {
+        // Name 저장
         JSONArray arrName = _nodeData["Name"].AsArray;
         if (arrName != null)
         {
@@ -24,6 +28,7 @@ public class LanguageInfo
 			}
         }
 
+        // Contents 저장
         JSONArray arrContens = _nodeData["Contents"].AsArray;
         if (arrContens != null)
         {

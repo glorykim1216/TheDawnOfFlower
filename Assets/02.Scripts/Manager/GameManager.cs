@@ -15,8 +15,8 @@ public class GameManager : MonoSingleton<GameManager>
     // DB 로드 후 값 초기화 필요!
     public void InitGameManager()
     {
-        LanguageManager.Instance.LoadJson();
-        StandingManager.Instance.LoadJson();
+        LanguageInfoManager.Instance.LoadJson();
+        StandingInfoManager.Instance.LoadJson();
         SpriteManager.Instance.LoadSprite();
         SoundManager.Instance.LoadSound();
         GameManager.Instance.LoadMain();

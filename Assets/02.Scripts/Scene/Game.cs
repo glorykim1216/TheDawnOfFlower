@@ -9,9 +9,9 @@ public class Game : MonoBehaviour
 
     public Image backGround;
 
-    public Image character1;
-    public Image character2;
-    public Image character3;
+    public StandingCharacter character1;
+    public StandingCharacter character2;
+    public StandingCharacter character3;
 
     public GameObject nameImg;
     public GameObject contentsImg;
@@ -38,7 +38,7 @@ public class Game : MonoBehaviour
     public float SkipTime;
 
     StandingInfo standingInfo;
-    StandingCharacter standingChracter;
+    StandingCharacterManager standingChracter;
     // Use this for initialization
     void Start()
     {
@@ -48,10 +48,10 @@ public class Game : MonoBehaviour
         btn.onClick.AddListener(() => NextBtn());
 
         // Chapter 로드
-        LanguageInfo info = LanguageManager.Instance.GetText(GameManager.Instance.language + "Chapter1");
+        LanguageInfo info = LanguageInfoManager.Instance.GetText(GameManager.Instance.language + "Chapter1");
         // Standing 로드 -필요
-        standingInfo = StandingManager.Instance.GetInfo("Standing");
-        standingChracter = this.gameObject.AddComponent<StandingCharacter>();
+        standingInfo = StandingInfoManager.Instance.GetInfo("Standing");
+        standingChracter = this.gameObject.AddComponent<StandingCharacterManager>();
         // DB 로드 -필요
         currCount = 0;
 
@@ -105,9 +105,9 @@ public class Game : MonoBehaviour
         else
         {
             SetVisual(strNameText[currCount], strContentsText[currCount], standingInfo.BACKGROUND_LIST[currCount],
-                standingInfo.S1_LIST[currCount], standingInfo.S1_DIRECTION_LIST[currCount], standingInfo.S1_SCALE_LIST[currCount],
-                standingInfo.S2_LIST[currCount], standingInfo.S2_DIRECTION_LIST[currCount], standingInfo.S2_SCALE_LIST[currCount],
-                standingInfo.S3_LIST[currCount], standingInfo.S3_DIRECTION_LIST[currCount], standingInfo.S3_SCALE_LIST[currCount],
+                standingInfo.S1_LIST[currCount], standingInfo.S1_DIRECTION_LIST[currCount], standingInfo.S1_SCALE_LIST[currCount], standingInfo.S1_EFFECT_LIST[currCount],
+                standingInfo.S2_LIST[currCount], standingInfo.S2_DIRECTION_LIST[currCount], standingInfo.S2_SCALE_LIST[currCount], standingInfo.S2_EFFECT_LIST[currCount],
+                standingInfo.S3_LIST[currCount], standingInfo.S3_DIRECTION_LIST[currCount], standingInfo.S3_SCALE_LIST[currCount], standingInfo.S3_EFFECT_LIST[currCount],
                 "", "");
 
             currCount++;
@@ -116,9 +116,9 @@ public class Game : MonoBehaviour
     }
     // 모든 변수 입력
     public void SetVisual(string _name, string _contents, string _Background,
-        string _standing1, string _s1Direction, float _s1Scale,
-        string _standing2, string _s2Direction, float _s2Scale,
-        string _standing3, string _s3Direction, float _s3Scale,
+        string _standing1, string _s1Direction, float _s1Scale, string _s1Effect,
+        string _standing2, string _s2Direction, float _s2Scale, string _s2Effect,
+        string _standing3, string _s3Direction, float _s3Scale, string _s3Effect,
         string _sound1, string _sound2)
     {
         // Name 구분
@@ -172,28 +172,29 @@ public class Game : MonoBehaviour
         }
         else
         {
-            if (!_standing3.Equals("null"))         // 3명
-            {
-                standingChracter.SetCharacter(character1, true, _standing1, _s1Direction, _s1Scale, eStandingPosition.STANDING3_LEFT);
-                standingChracter.SetCharacter(character2, true, _standing2, _s2Direction, _s2Scale, eStandingPosition.STANDING1_CENTER);
-                standingChracter.SetCharacter(character3, true, _standing3, _s3Direction, _s3Scale, eStandingPosition.STANDING3_RIGHT);
-            }
-            else if (!_standing2.Equals("null"))    // 2명
-            {
-                standingChracter.SetCharacter(character1, true, _standing1, _s1Direction, _s1Scale, eStandingPosition.STANDING2_LEFT);
-                standingChracter.SetCharacter(character2, true, _standing2, _s2Direction, _s2Scale, eStandingPosition.STANDING2_RIGHT);
-                standingChracter.SetCharacter(character3, false);
-            }
-            else                                    // 1명
+            if (_standing2.Equals("null"))         // 1명
             {
                 // 스크립트 나올때까지 임시 주석(검 좌우 구분해야하나? 물어봐야함.)
                 //if(_standing1.Contains("sword"))
                 //    standingChracter.SetCharacter(character1, true, _standing1, _s1Direction, _s1Scale, eStandingPosition.SWORD);
                 //else
-                standingChracter.SetCharacter(character1, true, _standing1, _s1Direction, _s1Scale, eStandingPosition.STANDING1_CENTER);
+                standingChracter.SetCharacter(character1, true, _standing1, _s1Direction, _s1Scale, _s1Effect);
 
                 standingChracter.SetCharacter(character2, false);
                 standingChracter.SetCharacter(character3, false);
+
+            }
+            else if (_standing3.Equals("null"))    // 2명
+            {
+                standingChracter.SetCharacter(character1, true, _standing1, _s1Direction, _s1Scale, _s1Effect);
+                standingChracter.SetCharacter(character2, true, _standing2, _s2Direction, _s2Scale, _s2Effect);
+                standingChracter.SetCharacter(character3, false);
+            }
+            else                                    // 3명
+            {
+                standingChracter.SetCharacter(character1, true, _standing1, _s1Direction, _s1Scale, _s1Effect);
+                standingChracter.SetCharacter(character2, true, _standing2, _s2Direction, _s2Scale, _s2Effect);
+                standingChracter.SetCharacter(character3, true, _standing3, _s3Direction, _s3Scale, _s3Effect);
             }
         }
         nameText.text = _name;
