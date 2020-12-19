@@ -6,9 +6,9 @@ public class StandingCharacter : MonoBehaviour
 {
     public Image image;
     RectTransform rectTr_chracter;
-    bool isMove = false;
-    bool isShake = false;
-    Vector2 targetPosition;
+    public Vector2 targetPosition;
+
+    eCharacterEffect characterEffectState;
     void Start()
     {
         rectTr_chracter = this.GetComponent<RectTransform>();
@@ -17,85 +17,78 @@ public class StandingCharacter : MonoBehaviour
 
     void Update()
     {
-        if(isMove == true)
+        // 확대
+        if (characterEffectState == eCharacterEffect.EXPAND)
         {
-            rectTr_chracter.anchoredPosition = Vector2.MoveTowards(rectTr_chracter.position, targetPosition, 0.1f);
+            rectTr_chracter.localScale = Vector3.MoveTowards(rectTr_chracter.localScale, new Vector3(1.25f, 1.25f, 1.0f), 1 * Time.deltaTime);
         }
-        if(isShake == true)
+        // 이동
+        if (characterEffectState == eCharacterEffect.MOVE || characterEffectState == eCharacterEffect.DISAPPEAR || characterEffectState == eCharacterEffect.APPEAR)
         {
-
+            rectTr_chracter.anchoredPosition = Vector2.MoveTowards(rectTr_chracter.anchoredPosition, targetPosition, GameManager.Instance.standingMoveSpeed * Time.deltaTime);
         }
     }
 
-    public void Init(string _expression, string _effect)
+    public void Init(string _expression)
     {
-        isMove=false;
-        isShake = false;
+        characterEffectState = eCharacterEffect.NONE;
         image.sprite = SpriteManager.Instance.GetSprite(_expression);
         image.SetNativeSize();
 
-        switch (_effect)
+        image.CrossFadeAlpha(1, 0, true);
+        StopShake();
+    }
+    public void SetCharacterEffect(string _effect)
+    {
+        string[] effectTmp = _effect.Split('_');
+
+        if (effectTmp[0].Equals("Expand"))
+            characterEffectState = eCharacterEffect.EXPAND;
+        else if (effectTmp[0].Equals("Shake"))
+        {
+            //짧게
+            if (effectTmp[1].Equals("1"))
             {
-                case "Move1":
-                    targetPosition = new Vector2(0,0);
-                    isMove = true;
-                    break;
-                case "Move2":
-                    targetPosition = new Vector2(0,0);
-                    isMove = true;
-                    break;
-                   case "Move3":
-                    targetPosition = new Vector2(0,0);
-                    isMove = true;
-                    break;
-                case "Disappear1":
-                // 알파값 추가
-                // 사라지기
-                    targetPosition = new Vector2(0,0);
-                    isMove = true;
-                    break;
-                case "Disappear2":
-                // 알파값 추가
-                //사라지기
-                    targetPosition = new Vector2(0,0);
-                    isMove = true;
-                    break;
-                case "Disappear3":
-                // 알파값 추가
-                // 사라지기
-                    targetPosition = new Vector2(0,0);
-                    isMove = true;
-                    break;
-                case "Appear1":
-                // 알파값 추가
-                //나타나기
-                    targetPosition = new Vector2(0,0);
-                    isMove = true;
-                    break;
-                case "Appear2":
-                // 알파값 추가
-                // 나타나기
-                    targetPosition = new Vector2(0,0);
-                    isMove = true;
-                    break;
-                case "Appear3":
-                // 알파값 추가
-                //나타나기
-                    targetPosition = new Vector2(0,0);
-                    isMove = true;
-                    break;
-                case "Shake1":
-                // 짧게
-                    isShake = true;
-                    break;
-                case "Shake2":
-                // 길게
-                    isShake = true;
-                    break;
-                case "Skill":
-                // 특수 효과 캐릭마다 다를거같음.
-                    break;
+                characterEffectState = eCharacterEffect.SHAKE1;
+                InvokeRepeating("StartShake", 0f, Time.deltaTime);
+                Invoke("StopShake", 1.3f);
             }
+            // 길게
+            else
+            {
+                characterEffectState = eCharacterEffect.SHAKE2;
+                InvokeRepeating("StartShake", 0f, Time.deltaTime);
+                Invoke("StopShake", 2.2f);
+            }
+        }
+        else if (effectTmp[0].Equals("Skill"))
+        {
+
+        }
+        else
+        {
+            // 이동, 사라짐, 나타남
+            if (effectTmp[0].Equals("Move"))
+                characterEffectState = eCharacterEffect.MOVE;
+            else if (effectTmp[0].Equals("Disappear"))
+            {
+                characterEffectState = eCharacterEffect.DISAPPEAR;
+                //알파값 
+                image.CrossFadeAlpha(0, 0.7f, true);
+            }
+            else if (effectTmp[0].Equals("Appear"))
+            {
+                characterEffectState = eCharacterEffect.APPEAR;
+                //알파값 
+                image.CrossFadeAlpha(1, 0.7f, true);
+            }
+
+            // 이동방향
+            if (effectTmp[1].Equals("R"))
+                targetPosition = new Vector2(rectTr_chracter.anchoredPosition.x + 400, rectTr_chracter.anchoredPosition.y);
+            else if (effectTmp[1].Equals("L"))
+                targetPosition = new Vector2(rectTr_chracter.anchoredPosition.x - 400, rectTr_chracter.anchoredPosition.y);
+        }
     }
 
     public void SetPosition(Vector2 pos)
@@ -116,5 +109,18 @@ public class StandingCharacter : MonoBehaviour
     public void SetDirection()
     {
         rectTr_chracter.localScale = new Vector3(1, 1, 1);
+    }
+
+    void StartShake()
+    {
+        float PosX = Random.value * 2 - 1.0f;
+        float PosY = Random.value - 0.55f;
+        targetPosition = new Vector2(rectTr_chracter.anchoredPosition.x + PosX, rectTr_chracter.anchoredPosition.y + PosY);
+        rectTr_chracter.anchoredPosition = targetPosition;
+    }
+
+    void StopShake()
+    {
+        CancelInvoke("StartShake");
     }
 }

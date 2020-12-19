@@ -51,3 +51,15 @@ public enum eStandingPosition
     R,
     S
 }
+
+public enum eCharacterEffect
+{
+    NONE,
+    MOVE,
+    DISAPPEAR,
+    APPEAR,
+    EXPAND,
+    SHAKE1,
+    SHAKE2,
+    SKILL
+}

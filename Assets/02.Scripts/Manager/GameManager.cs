@@ -11,6 +11,8 @@ public class GameManager : MonoSingleton<GameManager>
     public eLanguage language = eLanguage.KOREA_;
 
     public string mainCharacterName;
+    
+    public int standingMoveSpeed = 600;
 
     // DB 로드 후 값 초기화 필요!
     public void InitGameManager()
