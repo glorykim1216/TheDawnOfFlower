@@ -98,17 +98,11 @@ public class StandingCharacter : MonoBehaviour
 
     public void SetDirection(string _direction)
     {
-        // L, M2 일때는 x스케일 -1
-        if (_direction.Equals("L") || _direction.Equals("M1"))
+        // L, M2 일때는 x스케일 -1 => 왼쪽에서서 오른쪽을 바라봄
+        if (_direction.Equals("L") || _direction.Equals("M1") || _direction.Equals("S1"))
             rectTr_chracter.localScale = new Vector3(-1, 1, 1);
         else
             rectTr_chracter.localScale = new Vector3(1, 1, 1);
-    }
-
-    // 항상 좌측방향
-    public void SetDirection()
-    {
-        rectTr_chracter.localScale = new Vector3(1, 1, 1);
     }
 
     void StartShake()

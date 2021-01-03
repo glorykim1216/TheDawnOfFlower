@@ -7,7 +7,8 @@ public class Game : MonoBehaviour
 {
     FadeInText fadeInText;
 
-    public Image backGround;
+    public Image backgroundImage;
+    string currBackgroundName;
 
     public StandingCharacter character1;
     public StandingCharacter character2;
@@ -108,18 +109,18 @@ public class Game : MonoBehaviour
                 standingInfo.S1_LIST[currCount], standingInfo.S1_DIRECTION_LIST[currCount], standingInfo.S1_SCALE_LIST[currCount], standingInfo.S1_EFFECT_LIST[currCount],
                 standingInfo.S2_LIST[currCount], standingInfo.S2_DIRECTION_LIST[currCount], standingInfo.S2_SCALE_LIST[currCount], standingInfo.S2_EFFECT_LIST[currCount],
                 standingInfo.S3_LIST[currCount], standingInfo.S3_DIRECTION_LIST[currCount], standingInfo.S3_SCALE_LIST[currCount], standingInfo.S3_EFFECT_LIST[currCount],
-                "", "");
+                standingInfo.SOUND1_LIST[currCount], standingInfo.SOUND2_LIST[currCount], standingInfo.BACKGROUND_EFFECT_LIST[currCount]);
 
             currCount++;
         }
 
     }
     // 모든 변수 입력
-    public void SetVisual(string _name, string _contents, string _Background,
+    public void SetVisual(string _name, string _contents, string _background,
         string _standing1, string _s1Direction, float _s1Scale, string _s1Effect,
         string _standing2, string _s2Direction, float _s2Scale, string _s2Effect,
         string _standing3, string _s3Direction, float _s3Scale, string _s3Effect,
-        string _sound1, string _sound2)
+        string _sound1, string _sound2, string _backgroundEffect)
     {
         // Name 구분
         if (_name.Equals("chapter"))
@@ -162,6 +163,14 @@ public class Game : MonoBehaviour
                 fadeInText.SetTextUI(contentsText);
             }
         }
+        // 배경
+        if (currBackgroundName != _background)
+        {
+            currBackgroundName = _background;
+            backgroundImage.sprite = SpriteManager.Instance.GetSprite(_background);
+        }
+        // 배경 효과
+        SetBackgroundEffect(_backgroundEffect);
 
         // Standing 캐릭터
         if (_standing1.Equals("null"))               // 0명
@@ -212,6 +221,54 @@ public class Game : MonoBehaviour
         {
             if (_obj.activeSelf == true)
                 _obj.SetActive(false);
+        }
+    }
+
+    public void SetBackgroundEffect(string _backgroundEffect)
+    {
+        if (_backgroundEffect.Equals("FadeIn"))
+        {
+
+        }
+        else if (_backgroundEffect.Equals("FadeOut"))
+        {
+
+        }
+        else if (_backgroundEffect.Equals("FadeIn_R"))
+        {
+
+        }
+        else if (_backgroundEffect.Equals("FadeIn_L"))
+        {
+
+        }
+        else if (_backgroundEffect.Equals("FadeIn_U"))
+        {
+
+        }
+        else if (_backgroundEffect.Equals("FadeIn_D"))
+        {
+
+        }
+        else if (_backgroundEffect.Equals("FadeOut_D"))
+        {
+
+        }
+        else if (_backgroundEffect.Equals("Shake"))
+        {
+
+        }
+        else if (_backgroundEffect.Equals("Red"))
+        {
+
+        }
+        else if (_backgroundEffect.Equals("Old"))
+        {
+
+        }
+        else if (_backgroundEffect.Equals("FadeIn_White"))
+        {
+
         }
     }
 

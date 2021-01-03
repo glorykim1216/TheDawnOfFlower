@@ -63,3 +63,17 @@ public enum eCharacterEffect
     SHAKE2,
     SKILL
 }
+
+public enum eBackgroundEffect
+{
+    NONE,
+    FADE_IN,
+    FADE_OUT,
+    FADE_RIGHT,
+    FADE_LEFR,
+    FADE_UP,
+    FADE_DOWN,
+    Shake,
+    Red,
+    Old
+}

@@ -56,6 +56,12 @@ public class SpriteManager : MonoSingleton<SpriteManager>
 
         //네페라리아
         ResourcesSpriteLoad("Standing/Nepelalia");
+        
+        //티토
+        ResourcesSpriteLoad("Standing/Tito");
+
+        //티토
+        ResourcesSpriteLoad("Standing/Enlim");
     }
 
     public void BackgroudSpriteLoad()

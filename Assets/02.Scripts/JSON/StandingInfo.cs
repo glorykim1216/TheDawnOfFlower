@@ -22,6 +22,8 @@ public class StandingInfo
     List<string> s3EffectList = new List<string>();
     List<string> sound1List = new List<string>();
     List<string> sound2List = new List<string>();
+    List<string> backgroundEffectList = new List<string>();
+
 
     public List<string> BACKGROUND_LIST { get { return backgroundList; } }
     public List<string> S1_LIST { get { return s1List; } }
@@ -38,6 +40,7 @@ public class StandingInfo
     public List<string> S3_EFFECT_LIST { get { return s3EffectList; } }
     public List<string> SOUND1_LIST { get { return sound1List; } }
     public List<string> SOUND2_LIST { get { return sound2List; } }
+    public List<string> BACKGROUND_EFFECT_LIST { get { return backgroundList; } }
 
     public StandingInfo(JSONNode _nodeData)
     {
@@ -163,6 +166,15 @@ public class StandingInfo
             for (int i = 0; i < arrTemp.Count; i++)
             {
                 sound2List.Add(arrTemp[i]);
+            }
+        }
+
+        arrTemp = _nodeData["Background_Effect"].AsArray;
+        if (arrTemp != null)
+        {
+            for (int i = 0; i < arrTemp.Count; i++)
+            {
+                backgroundEffectList.Add(arrTemp[i]);
             }
         }
     }
